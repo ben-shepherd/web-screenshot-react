@@ -12,3 +12,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.urlItem.row {
+  background-color:#eee;
+  min-height:50px;
+  line-height:50px;
+  margin-bottom:10px;
+}
+.urlItem.row .btn {
+  float:right;
+  margin-top:6.5px;
+}
+.m {
+  margin:15px;
+}
+mt {
+  margin-top:35px;
+}
+.mr {
+  margin-right:15px;
+}
+.ml {
+  margin-left:15px;
+}
+.mb {
+  margin-bottom:15px;
+}
+
+textarea#textarea {
+  padding:3px 15px;
+  height:100px;
+  border-radius:2px;
+  border:1px solid #00000026;
+  line-height:18px;
+  font-size:12px;
+  color:#000;
+}
+
+.card-close {
+  position:absolute;
+  top:-5px;
+  right:5px;
+  font-size:25px;
+  opacity:0.8;
+}
+.card-close:hover {
+  cursor:pointer;
+}
