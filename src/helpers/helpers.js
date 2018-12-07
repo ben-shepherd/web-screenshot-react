@@ -1,4 +1,10 @@
-export const isValidURL = (str) => {
+import validUrl from 'valid-url'
+
+export const isValidURL = (url) => {
+  return validUrl.isUri(url)
+}
+
+export const isValidURL_old = (str) => {
   var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
   '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
   '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address

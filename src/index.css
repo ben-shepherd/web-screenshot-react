@@ -59,3 +59,33 @@ textarea#textarea {
 .card-close:hover {
   cursor:pointer;
 }
+.header {
+  color:#235f9a;
+  font-weight:100;
+  margin:15px 0;
+}
+.File .thumbnail {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background-size:cover;
+  background-position:center;
+  box-shadow:1px 1px 3px rgba(0,0,0,0.2);
+  float:left;
+  margin-right:15px;
+}
+.File .card-content {
+  padding-bottom:75px;
+}
+.File .FileActions { 
+  position: absolute;;
+  left:25px;
+  bottom:25px;
+}
+.File .FileActions .ViewButton {
+  margin-right:15px;
+}
+.File .time {
+  position: relative;;
+  bottom:10px;
+}

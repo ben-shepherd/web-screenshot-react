@@ -26,8 +26,8 @@ class UrlItem extends Component {
         let backgroundColor = 'blue darken-2 white-text'
 
         if(status === statusTypes.COMPLETE) {
-            backgroundColor = 'purple darken-2 white-text'
-        } else if(status === status.ERROR) {
+            backgroundColor = 'blue darken-2 white-text'
+        } else if(status === statusTypes.ERROR) {
             backgroundColor = 'red darken-2 white-text'
         }
 
@@ -50,8 +50,7 @@ class UrlItem extends Component {
         if(status === statusTypes.COMPLETE) {
             return (
                 <div className="card-action">
-                    <p className="status">{this.state.status}</p>
-                    {this.renderViewImageLink()}
+                    <a href="/" onClick={this.handleToggleImage}>{!this.state.imageVisible ? 'Show' : 'Hide'} Snapshot</a>
                 </div>
             )
         }
@@ -59,30 +58,40 @@ class UrlItem extends Component {
 
     renderCardContents() {
 
-        const { url, imageUrl, status, statusTypes, errorMessage } = this.props
-        const { imageVisible } = this.state
-        const cardTitle = <span className="card-title">{url}</span>
-        const error = status === statusTypes.ERROR ? <p>{errorMessage}</p> : null
+        try {
+            const { niceUrl, url, imageUrl, status, statusTypes } = this.props
+            const { imageVisible } = this.state
+            const cardTitle = <div>
+                <span className="card-title">{niceUrl}</span>
+            </div>
+            let error = null
 
-        if(status === statusTypes.ERROR) {
-            
+            if(status === statusTypes.ERROR) {
+                const errorMessage = typeof this.props.errorMessage.message == 'undefined' ? this.props.errorMessage : this.props.errorMessage.message
+                error = status === statusTypes.ERROR ? <p>{errorMessage}</p> : null
+            }
+    
+
+            if(imageVisible) {
+                return (
+                    <div className="card-image">
+                        <img src={imageUrl} alt={imageUrl}/>
+                        {cardTitle}
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div>
+                        {cardTitle}
+                        <p>{status}</p>
+                        {error}
+                    </div>
+                )
+            }
         }
-        if(imageVisible) {
-            return (
-                <div className="card-image">
-                    <img src={imageUrl} alt={imageUrl}/>
-                    {cardTitle}
-                </div>
-            )
-        }
-        else {
-            return (
-                <div>
-                    {cardTitle}
-                    <p>{status}.</p>
-                    {error}
-                </div>
-            )
+        catch (err) {
+            console.log('Error rendering card contents', err)
         }
     }
 

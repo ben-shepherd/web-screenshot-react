@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import FileForm from './components/FileForm'
-import Nav from './components/Nav'
+import { BrowserRouter, Route } from 'react-router-dom'
+
 import { sendPingRequest } from './libs/api'
+import Home from './components/pages/home/index'
+import Media from './components/pages/media/index'
+import Nav from './components/parts/Nav'
 
 class App extends Component {
 
@@ -13,6 +16,7 @@ class App extends Component {
       connecting: false,
       connected: null
     }
+    
   }
   
   componentDidMount() {
@@ -68,16 +72,31 @@ class App extends Component {
     }
   }
 
+  renderContent() {
+    if(this.state.connected) {
+        return (
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/media" component={Media} />
+          <Route path="/media/:category" component={Media} />
+        </div>
+      )
+    }
+    else {
+      return this.renderConnectStatus()
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <Nav />
-        <div className="container mt">
-          {this.state.connected ? 
-            <FileForm /> :
-            this.renderConnectStatus()}
+      <BrowserRouter>
+        <div className="App">
+          <Nav />
+          <div className="container" id="MainContentContainer">
+            {this.renderContent()}
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }
